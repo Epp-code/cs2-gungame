@@ -1,4 +1,5 @@
-﻿using GunGame;
+﻿using CounterStrikeSharp.API;
+using GunGame;
 using GunGame.Variables;
 namespace GunGame.API
 {
@@ -22,9 +23,9 @@ namespace GunGame.API
             KnifeStealEvent?.Invoke(args);
         }
         public event Action<KillEventArgs>? KillEvent;
-        public bool RaiseKillEvent(int killer, int victim, string weapon, bool teamkill)
+        public bool RaiseKillEvent(int killer, int victim, string weapon, bool teamkill, bool headshot)
         {
-            var args = new KillEventArgs(killer, victim, weapon, teamkill);
+            var args = new KillEventArgs(killer, victim, weapon, teamkill, headshot);
             KillEvent?.Invoke(args);
             return args.Result;
         }
@@ -54,6 +55,13 @@ namespace GunGame.API
         {
             RestartEvent?.Invoke();
         }
+        public event Action<RespawnPlayerEventArgs>? RespawnPlayerEvent;
+        public bool RaiseRespawnPlayerEvent(int slot)
+        {
+            var args = new RespawnPlayerEventArgs(slot);
+            RespawnPlayerEvent?.Invoke(args);
+            return args.Result;
+        }
         public int GetMaxLevel()
         {
             return GGVariables.Instance.WeaponOrderCount;
@@ -75,6 +83,50 @@ namespace GunGame.API
         public bool IsWarmupInProgress()
         {
             return _gunGame.warmupInitialized;
+        }
+        public void RespawnPlayer(int slot)
+        {
+            var player = _gunGame.playerManager.FindBySlot(slot, "RespawnPlayer");
+            if (player != null)
+            {
+                var pl = Utilities.GetPlayerFromSlot(slot);
+                if (pl != null)
+                {
+                    _gunGame.Respawn(pl);
+                }
+            }
+        }
+        public void AddPoints(int slot, int points)
+        {
+            var player = _gunGame.playerManager.FindBySlot(slot);
+            if (player != null)
+            {
+                player.CurrentKillsPerWeap += points;
+            }
+        }
+        public void Removelevels(int slot, int levels)
+        {
+            var player = _gunGame.playerManager.FindBySlot(slot);
+            if (player != null)
+            {
+                player.CurrentLevelPerRound -= levels;
+                if (player.CurrentLevelPerRound < 0)
+                {
+                    player.CurrentLevelPerRound = 0;
+                }
+                int oldLevelKiller = (int)player.Level;
+                int level = _gunGame.ChangeLevel(player, -levels);
+
+                if (oldLevelKiller == level)
+                {
+                    return;
+                }
+                if (_gunGame.Config.TurboMode)
+                {
+                    _gunGame.GiveNextWeapon(slot);
+                }
+                
+            }
         }
     }
 }

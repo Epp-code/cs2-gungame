@@ -17,6 +17,7 @@ namespace GunGame.Variables
                 return _instance;
             }
         }
+        public bool RestartGame { get; set; } = false;
         public string ServerLanguageCode = "en";
         public string ActiveConfigFolder = "gungame";
         public ConVar? Mp_friendlyfire { get; set; }

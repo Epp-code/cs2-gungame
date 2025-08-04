@@ -620,7 +620,7 @@ namespace GunGame.Stats
                     player.Music = sound == 1;
                     player.Culture = tempCulture;
                     player.SetLanguage();
-                    Plugin.Logger.LogInformation($"[GunGame_Stats] {player.PlayerName} wins {player.PlayerWins}, sound {sound}");
+//                    Plugin.Logger.LogInformation($"[GunGame_Stats] {player.PlayerName} wins {player.PlayerWins}, sound {sound}");
                 }
             });
         }

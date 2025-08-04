@@ -150,7 +150,7 @@ public class GGConfig
     [JsonPropertyName("KnifeProHE")]
     public bool KnifeProHE { get; set; } = false;
 
-    /* Sound confirmation someone on the nade level */
+    /* Sound confirmation someone on the knife level */
     [JsonPropertyName("KnifeInfoSound")]
     public string KnifeInfoSound { get; set; } = "sounds/ui/deathmatch_kill_bonus.wav";
 
@@ -279,9 +279,9 @@ public class GGConfig
     [JsonPropertyName("NumberOfNades")]
     public int NumberOfNades { get; set; } = 1;
     
-    /* Show levels in scoreboard */
+    /* Show levels in scoreboard: 0 - disabled, 1 - replace kills, 2 - deaths, 3 - assists, 4 - score */
     [JsonPropertyName("LevelsInScoreboard")]
-    public bool LevelsInScoreboard { get; set; } = false;
+    public int LevelsInScoreboard { get; set; } = 4;
 
     /* Give player armor and helmet  on spawn */
     [JsonPropertyName("ArmorKevlarHelmet")]
@@ -441,7 +441,6 @@ public class GGConfig
     /* Friendy fire change status sound confirmation  */
     [JsonPropertyName("FriendlyFireInfoSound")]
     public string FriendlyFireInfoSound { get; set; } = "sounds/ui/item_drop5_legendary.wav";
-
 
     /**
     * Block weapon switch if you get next hegrenade 
@@ -675,6 +674,10 @@ public class GGConfig
     [JsonPropertyName("DontAddWinsOnBot")]
     public bool DontAddWinsOnBot { get; set; } = false;
 
+    /* True if sounds organised in soundevents. So soundevents names should be set in corresponded parameters */
+    [JsonPropertyName("UseSoundEvents")]
+    public bool UseSoundEvents { get; set; } = false;
+
     /* List of sounds after we have the Winner  */
     [JsonPropertyName("WinnerSound")]
     public List<string> WinnerSound { get; set; } = new List<string>
@@ -693,6 +696,9 @@ public class GGConfig
         "sounds/music/hotlinemiami_01/startaction_01.mp3",
         "sounds/music/ianhultquist_01/startaction_03.mp3"
     };
+    [JsonPropertyName("WinnerSoundEvent")]
+    public string WinnerSoundEvent { get; set; } = "winner.event";
+    /* Sound played to a player when he lost a level  */
     [JsonPropertyName("LevelDownSound")]
     public string LevelDownSound { get; set; } = "sounds/ui/armsrace_demoted.wav";
 
@@ -722,6 +728,8 @@ public class GGConfig
         "sounds/vo/agents/seal_fem/af1_sees_friend_killed_06.wav",
         "sounds/vo/agents/swat_fem/sees_friend_killed_04.wav"
     };
+    [JsonPropertyName("TeamKillSoundEvent")]
+    public string TeamKillSoundEvent { get; set; } = "teamkill.event";
 
     /* List of sounds for everyone when someone stole a level by knife */
     [JsonPropertyName("KnifeStealSound")]
@@ -732,10 +740,17 @@ public class GGConfig
         "sounds/vo/commander/commander_comment_09.wav",
         "sounds/vo/commander/commander_comment_14.wav"
     };
+    [JsonPropertyName("KnifeStealSoundEvent")]
+    public string KnifeStealSoundEvent { get; set; } = "knifesteal.event";
+
     /* Sound for everyone when someone killed my Molotov and stole a level */
     [JsonPropertyName("MolotovKillSound")]
     public string MolotovKillSound { get; set; } = "gungame/gori.mp3";
     
     [JsonPropertyName("SpawnDistance")]
-    public double SpawnDistance { get; set; } = 60.0;
+    public double SpawnDistance { get; set; } = 100.0;
+
+    [JsonPropertyName("LogSpawnDistance")]
+    public bool LogSpawnDistance { get; set; } = false;
+
 }
