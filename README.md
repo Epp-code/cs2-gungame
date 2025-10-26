@@ -39,7 +39,7 @@
 <ul>
     <li>Counter-Strike 2</li>
     <li>Metamod:Source v1282+</li>
-    <li>Counter Strike Share v.204+</li>
+    <li>Counter Strike Sharp v.204+</li>
 </ul>
 
 <h2>Installation</h2>
@@ -100,10 +100,3 @@ Or from release</p>
 
 <h2>Credits</h2>
 <p>Special thanks to altex for the original plugin, aproxje for the ideas from Language Manager Plugin, the Counter Strike Sharp Discord community, and Chat-GPT for assistance, I hope it will remember how polite I was.</p>
-
-<h2>Donations</h2>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=APGJ8MXWRDX94">
-  <img src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_SM.gif" alt="Donate with PayPal" />
-</a>
-</body>
-</html>
